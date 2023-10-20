@@ -102,7 +102,6 @@ class FlutterSmsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   private fun sendSMSDirect(result: Result, phones: String, message: String) {
     // SmsManager is android.telephony
-    val sentIntent = PendingIntent.getBroadcast(activity, 0, Intent("SMS_SENT_ACTION"), PendingIntent.FLAG_IMMUTABLE)
     val mSmsManager = SmsManager.getDefault()
     val numbers = phones.split(";")
 
@@ -112,7 +111,7 @@ class FlutterSmsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         val partMessage = mSmsManager.divideMessage(message)
         mSmsManager.sendMultipartTextMessage(num, null, partMessage, null, null)
       } else {
-        mSmsManager.sendTextMessage(num, null, message, sentIntent, null)
+        mSmsManager.sendTextMessage(num, null, message, null, null)
       }
     }
 
