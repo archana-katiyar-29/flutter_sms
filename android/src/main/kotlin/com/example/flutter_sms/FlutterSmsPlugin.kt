@@ -72,21 +72,11 @@ class FlutterSmsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     when (call.method) {
-        "sendSMS" -> {
-          if (!canSendSMS()) {
-            result.error(
-                    "device_not_capable",
-                    "The current device is not capable of sending text messages.",
-                    "A device may be unable to send messages if it does not support messaging or if it is not currently configured to send messages. This only applies to the ability to send text messages via iMessage, SMS, and MMS.")
-            return
-          }
+        "sendSMS" -> {          
           val message = call.argument<String?>("message") ?: ""
           val recipients = call.argument<String?>("recipients") ?: ""
           val sendDirect = call.argument<Boolean?>("sendDirect") ?: false
-          sendSMS(result, recipients, message!!, sendDirect)
-        }
-        "canSendSMS" -> result.success(canSendSMS())
-        else -> result.notImplemented()
+          sendSMS(result, recipients, message!!, sendDirect)       
     }
   }
 
