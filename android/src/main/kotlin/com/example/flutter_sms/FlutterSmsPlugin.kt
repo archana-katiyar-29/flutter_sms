@@ -77,6 +77,7 @@ class FlutterSmsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
           val recipients = call.argument<String?>("recipients") ?: ""
           val sendDirect = call.argument<Boolean?>("sendDirect") ?: false
           sendSMS(result, recipients, message!!, sendDirect)       
+      }
     }
   }
 
